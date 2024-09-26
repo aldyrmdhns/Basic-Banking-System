@@ -43,7 +43,7 @@ function useWithdraw() {
 account.updateDisplayMoney(document.getElementById("displaySaldo"));
 account.updateDisplayName(document.getElementById("displayNama"));
 
-//Penggunaan object window agar fungsi dapat dipanggil saat button
+//Penggunaan object window agar fungsi dapat dipanggil saat button diklik
 window.useDeposit = useDeposit;
 window.useWithdraw = useWithdraw;
 
