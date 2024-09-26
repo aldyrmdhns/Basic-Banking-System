@@ -7,10 +7,11 @@
     </head>
 
     <body>
-        <script src="bank_account.js"></script>
+        <script type="module" src="bank_system.js"></script>
         <h1> Bank Account </h1>
+        <h2 id="displayNama"></h2>
         <h2> Saldo = <span id="displaySaldo">0</span> </h2>
-        <button onclick="addSaldo()"> Tambah Saldo </button>
-        <button onclick="decreaseSaldo()"> Kurangi Saldo </button>
+        <button onclick="useDeposit()"> Deposit </button>
+        <button onclick="useWithdraw()"> Withdraw </button>
     </body>
 </html>
