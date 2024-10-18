@@ -2,6 +2,7 @@ const {
 	createAccountService,
 	getAllAccountService,
 	getAccountByIdService,
+	deleteAccountService,
 } = require("../services/accountServices");
 const { isEmpty, isNumber } = require("../utils/validator");
 
@@ -36,7 +37,7 @@ const createAccount = async (req, res, next) => {
 			data: newAccount,
 		});
 	} catch (error) {
-        if (error.status) {
+		if (error.status) {
 			return res.status(error.status).json({
 				status: "Failed",
 				message: error.message,
@@ -80,4 +81,32 @@ const getAccountById = async (req, res, next) => {
 	}
 };
 
-module.exports = { createAccount, getAllAccount, getAccountById };
+const deleteAccount = async (req, res, next) => {
+	try {
+		const id = req.params.id;
+
+		const deletedAccount = await deleteAccountService(id);
+
+		if (!deletedAccount) {
+			return res.status(404).json({
+				status: "Failed",
+				message: "Bank account not found",
+			});
+		}
+
+		res.status(200).json({
+			status: "Success",
+			message: "Account and related transactions deleted successfully",
+			data: deletedAccount,
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+module.exports = {
+	createAccount,
+	getAllAccount,
+	getAccountById,
+	deleteAccount,
+};

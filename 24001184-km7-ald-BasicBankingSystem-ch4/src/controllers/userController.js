@@ -56,13 +56,13 @@ const createUser = async (req, res, next) => {
 			data: newUser,
 		});
 	} catch (error) {
-	    if (error.status) {
+		if (error.status) {
 			return res.status(error.status).json({
 				status: "Failed",
 				message: error.message,
 			});
 		}
-	
+
 		next(error);
 	}
 };

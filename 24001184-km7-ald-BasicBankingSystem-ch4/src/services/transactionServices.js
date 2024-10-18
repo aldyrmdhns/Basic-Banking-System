@@ -27,7 +27,6 @@ const createTransasctionService = async (data) => {
 		};
 	}
 
-	// Check for sufficient balance and minimum balance requirement
 	if (sourceAccount.balance < amount) {
 		throw { status: 400, message: "Insufficient Balance" };
 	}
@@ -68,6 +67,7 @@ const createTransasctionService = async (data) => {
 const getAllTransactionService = async () => {
 	const transaction = await prisma.transaction.findMany({
 		select: {
+			id: true,
 			source_account: {
 				select: {
 					bank_name: true,
