@@ -1,0 +1,1137 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Basic Banking Simulation API",
+    "description": "This is an API for the challenged issued by Binar Academy, using Swagger as a form of API Documentation for ease of use",
+    "contact": {
+      "name": "Aldy Ramadhan Syahputra"
+    },
+    "license": {
+      "name": "Free"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9090/api/v1"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get All Users",
+        "description": "Getting All Users with no exceptions",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved All Data"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Aldy Ramadhan Syahputra"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "dyrmdhns101@gmail.com"
+                          },
+                          "profile": {
+                            "type": "object",
+                            "properties": {
+                              "identity_type": {
+                                "type": "string",
+                                "example": "KTP"
+                              },
+                              "identity_number": {
+                                "type": "string",
+                                "example": "64646464"
+                              },
+                              "address": {
+                                "type": "string",
+                                "example": "Jln Perjuangan"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a User",
+        "description": "Creates a new user with the provided details",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "name",
+                  "password",
+                  "profile"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Carl Vincenzo"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "carl123@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  },
+                  "profile": {
+                    "required": [
+                      "address",
+                      "identity_number",
+                      "identity_type"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "identity_type": {
+                        "type": "string",
+                        "example": "KTP"
+                      },
+                      "identity_number": {
+                        "type": "string",
+                        "example": "887726"
+                      },
+                      "address": {
+                        "type": "string",
+                        "example": "Jln. Pangeran"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "User Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User Created Successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 8
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Carl Vincenzo"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "carl123@gmail.com"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "12345678"
+                        },
+                        "profile": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 8
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 8
+                            },
+                            "identity_type": {
+                              "type": "string",
+                              "example": "KTP"
+                            },
+                            "identity_number": {
+                              "type": "string",
+                              "example": "887726"
+                            },
+                            "address": {
+                              "type": "string",
+                              "example": "Jln. Pangeran"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed response cases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Failed To Create User, Make Sure To fill all Form",
+                        "Email must be a Gmail address",
+                        "Password must be at least 8 characters long",
+                        "Identity number must be a number",
+                        "Email Already Used",
+                        "Identity Number Already Used"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User by ID",
+        "description": "Get a single user by their ID",
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved The Data"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "Aldy Ramadhan Syahputra"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "dyrmdhns101@gmail.com"
+                        },
+                        "profile": {
+                          "type": "object",
+                          "properties": {
+                            "identity_type": {
+                              "type": "string",
+                              "example": "KTP"
+                            },
+                            "identity_number": {
+                              "type": "string",
+                              "example": "64646464"
+                            },
+                            "address": {
+                              "type": "string",
+                              "example": "Jln Perjuangan"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "There's no Such User!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "Get All Accounts",
+        "description": "Getting All Accounts with no exceptions",
+        "operationId": "getAccounts",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved All Data"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 6
+                          },
+                          "bank_name": {
+                            "type": "string",
+                            "example": "vincenzoo"
+                          },
+                          "bank_account_number": {
+                            "type": "string",
+                            "example": "771166"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "Creates an Account",
+        "description": "Creates a new account with the already created users",
+        "operationId": "createAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "balance",
+                  "bank_account_number",
+                  "bank_name",
+                  "user_id"
+                ],
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "example": 8
+                  },
+                  "bank_name": {
+                    "type": "string",
+                    "example": "vincenzoo"
+                  },
+                  "bank_account_number": {
+                    "type": "string",
+                    "example": "771166"
+                  },
+                  "balance": {
+                    "type": "integer",
+                    "example": 200000
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Account Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account Created Successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 6
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "example": "8"
+                        },
+                        "bank_name": {
+                          "type": "string",
+                          "example": "vincenzoo"
+                        },
+                        "bank_account_number": {
+                          "type": "string",
+                          "example": "771166"
+                        },
+                        "balance": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 200000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed response cases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Failed To Create User, Make Sure To fill all Form",
+                        "Email must be a Gmail address",
+                        "Password must be at least 8 characters long",
+                        "Identity number must be a number",
+                        "Email Already Used",
+                        "Identity Number Already Used"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/accounts/{id}": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "Get Accounts by ID",
+        "description": "Get a single account by their ID",
+        "operationId": "getAccountById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved The Data"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bank_name": {
+                          "type": "string",
+                          "example": "vincenzoo"
+                        },
+                        "bank_account_number": {
+                          "type": "string",
+                          "example": "771166"
+                        },
+                        "balance": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 200000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "There's no Such Account!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Get All transactions",
+        "description": "Getting All Transactions with no exceptions",
+        "operationId": "getTransactions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved All Data"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 5
+                          },
+                          "source_account": {
+                            "type": "object",
+                            "properties": {
+                              "bank_name": {
+                                "type": "string",
+                                "example": "vincenzoo"
+                              },
+                              "bank_account_number": {
+                                "type": "string",
+                                "example": "771166"
+                              }
+                            }
+                          },
+                          "amount": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 8000
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Creates a Transaction",
+        "description": "Creates a transaction between two bank accounts.",
+        "operationId": "createTransaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "amount",
+                  "destination_bank_account_number",
+                  "source_bank_account_number"
+                ],
+                "type": "object",
+                "properties": {
+                  "source_bank_account_number": {
+                    "type": "string",
+                    "description": "The source bank account number from which the funds will be transferred.",
+                    "example": "771166"
+                  },
+                  "destination_bank_account_number": {
+                    "type": "string",
+                    "description": "The destination bank account number to which the funds will be transferred.",
+                    "example": "282828"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "The transaction amount (minimum 5000).",
+                    "format": "float",
+                    "example": 8000
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Transaction Created Successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 5
+                        },
+                        "source_bank_name": {
+                          "type": "string",
+                          "example": "vincenzoo"
+                        },
+                        "destination_bank_name": {
+                          "type": "string",
+                          "example": "Dyrmdhns"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 8000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Transaction Failed, Make Sure To fill all Form",
+                        "Source Bank Account Number must be a number",
+                        "Destination Bank Account Number must be a number",
+                        "Balance Amount must be a number",
+                        "Insufficient Balance",
+                        "Cannot perform transaction. Minimum Transaction is 5000 required"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Account Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Source bank account number not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/transactions/{id}": {
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Get Transactions by ID",
+        "description": "Get a single Transactions by their ID",
+        "operationId": "getTransactionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Retrieved The Data"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 5
+                        },
+                        "source_account": {
+                          "type": "object",
+                          "properties": {
+                            "bank_name": {
+                              "type": "string",
+                              "example": "vincenzoo"
+                            },
+                            "bank_account_number": {
+                              "type": "string",
+                              "example": "771166"
+                            }
+                          }
+                        },
+                        "destination_account": {
+                          "type": "object",
+                          "properties": {
+                            "bank_name": {
+                              "type": "string",
+                              "example": "Dyrmdhns"
+                            },
+                            "bank_account_number": {
+                              "type": "string",
+                              "example": "282828"
+                            }
+                          }
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 8000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "authenticate"
+        ],
+        "summary": "Registering a New User",
+        "description": "Creates a New User",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "name",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Theo Valdez"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "valdez@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "valdez123"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "User Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User Created Successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 11
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Theo Valdez"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "valdez@gmail.com"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "$2b$10$qXDlQ.RETLPLmtP6vZAnSOftxcKdlSmPKRsVJyf0NTtCEtyKG9Mtu"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Failed To Create User, Make Sure To fill all Form",
+                        "Email must be a Gmail address",
+                        "Password must be at least 8 characters long",
+                        "Email Already Used"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "authenticate"
+        ],
+        "summary": "Login for Access Token",
+        "description": "Login to get a token for the User",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "valdez@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "valdez123"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Login Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Login Successful"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "AccessToken": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUwOCwidXNlck5hbWUiOiJUaGVvIFZhbGRleiIsImlhdCI6MTczMDI2NzYxNywiZXhwIjoxNzMwMjcxMjE3fQ.ugyQMIkUj-3ODXXnH5R1Jaeh84KLKQpZZ-s-r2G348g"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Failed To Create User, Make Sure To fill all Form",
+                        "Email must be a Gmail address",
+                        "Email or Password Incorrect!"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/auth/authenticate": {
+      "get": {
+        "tags": [
+          "authenticate"
+        ],
+        "summary": "Checking the Authentication",
+        "description": "Check the Obtained Access Token From Login",
+        "operationId": "authenticate",
+        "responses": {
+          "200": {
+            "description": "Authentication Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "You're Okay To Be In Here!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized/Unauthenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "You aren't Authorized Here!"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "x-original-swagger-version": "2.0"
+}
