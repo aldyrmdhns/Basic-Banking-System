@@ -1,0 +1,377 @@
+{
+	"info": {
+		"_postman_id": "47a99ab0-02dd-41aa-b58f-a51d3d0a0278",
+		"name": "BasicBankingSystem-Binar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29694438"
+	},
+	"item": [
+		{
+			"name": "Create New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Aldy Ramadhan Syahputra",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "aldy@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "profile[identity_type]",
+							"value": "KTP",
+							"type": "text"
+						},
+						{
+							"key": "profile[identity_number]",
+							"value": "282828",
+							"type": "text"
+						},
+						{
+							"key": "profile[address]",
+							"value": "Jln. Perjuangan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Account with the Available User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "124",
+							"type": "text"
+						},
+						{
+							"key": "bank_name",
+							"value": "aldyramadhan",
+							"type": "text"
+						},
+						{
+							"key": "bank_account_number",
+							"value": "828282",
+							"type": "text"
+						},
+						{
+							"key": "balance",
+							"value": "200000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/accounts/7",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A New Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "source_bank_account_number",
+							"value": "288882",
+							"type": "text"
+						},
+						{
+							"key": "destination_bank_account_number",
+							"value": "828282",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "10000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/transactions/6",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Theo Valdez",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "valdez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "valdez123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "valdez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "valdez123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Authenticate",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjkxMSwidXNlck5hbWUiOiJUaWZhIExvY2toYXJ0IiwiaWF0IjoxNzMwMjk1MjcyLCJleHAiOjE3MzAyOTg4NzJ9.sIL5rDbo0uFed-dR9DVLgPJHwHoV-GFCi4sJXk30PZI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:9090/api/v1/auth/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
